@@ -1,0 +1,103 @@
+.app {
+  min-height: max(600px, 100vh);
+  display: flex;
+  flex-direction: column;
+
+}
+
+.appHeader {
+  position: fixed;
+  width: 100%;
+  z-index: 50;
+  height: 200px;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 700px) {
+    height: 140px;
+  }
+
+}
+
+.activeList {
+  margin-top: 200px;
+  background-color: white;
+  flex-grow: 1;
+
+  @media (max-width: 700px) {
+    margin-top: 140px;
+  }
+}
+
+.activeListHead {
+  background-color: white;
+
+}
+
+
+.activeRow {
+  display: grid;
+  min-height: 60px;
+  grid-template-columns: repeat(6, 1fr);
+
+  @media (max-width: 700px) {
+    display: block;
+    padding: 30px 15px;
+
+  }
+
+  &>div {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #ddd;
+    padding: 5px 15px;
+
+    white-space: preserve nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @media (max-width: 700px) {
+      display: block;
+      text-align: center;
+      border-bottom: none;
+
+    }
+
+  }
+
+
+}
+
+.activeOddRow {
+  background-color: #eee;
+}
+
+.main {
+  flex-grow: 1;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+
+}
+
+
+.activeListFetchError {
+  color: red;
+}
+
+
+.activeListChangesIn24hoursPositive {
+  color: green;
+}
+
+.activeListChangesIn24hoursNegative {
+  color: red;
+}

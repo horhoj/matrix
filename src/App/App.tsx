@@ -1,9 +1,9 @@
-import styles from './App.module.scss';
+import { ActiveList } from '~/components/ActiveList';
 
 export function App() {
   return (
     <>
-      <div className={styles.App}>App: React + scss</div>
+      <ActiveList />
     </>
   );
 }

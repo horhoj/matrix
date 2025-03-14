@@ -1,0 +1,53 @@
+
+
+.appHeaderContentWrapper {
+  flex-grow: 1;
+  background-color: white;
+  padding: 15px;
+  display: flex;
+  border-bottom: 1px solid #ddd;
+
+
+
+}
+
+.appHeaderContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  &>div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: preserve nowrap;
+    
+  }
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+  }
+}
+
+.appHeaderLogo {
+  font-size: 30px;
+  font-weight: 500;
+
+  @media (max-width: 700px) {
+    font-size: 24px;
+  }
+}
+
+.appHeaderAddActiveBtn {
+  background-color: cadetblue;
+  padding: 10px 15px;
+  min-height: 50px;
+  color: white;
+
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
