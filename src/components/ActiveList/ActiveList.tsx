@@ -25,7 +25,7 @@ export function ActiveList() {
   }, []);
 
   const { width } = useWindowSize();
-  const isMobile = width !== null && width < 700;
+  const isMobile = width !== null && width <= 700;
 
   const count = activeData?.length ?? 0;
   const virtualizer = useWindowVirtualizer({
