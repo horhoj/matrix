@@ -15,7 +15,7 @@ export function ActiveSelect() {
 
   const parentRef = useRef<HTMLDivElement>(null);
   const [filterValue, setFilterValue] = useState('');
-  const [tockenCount, setTokenCount] = useState(1);
+  const [tokenCount, setTokenCount] = useState('1');
   const activeList = data ?? [];
 
   const activeListFiltered = useMemo(
@@ -23,16 +23,17 @@ export function ActiveSelect() {
     [activeList, filterValue],
   );
 
-  const handleSetCount = (val: string) => {
-    let actualVal = +val;
-    if (actualVal < 1 || Number.isNaN(actualVal)) {
-      actualVal = 1;
-    }
-    setTokenCount(actualVal);
-  };
+  const isTokenCountError = useMemo(() => {
+    const count = Number.parseInt(tokenCount);
+    return !(!Number.isNaN(count) && Number.isFinite(count));
+  }, [tokenCount]);
 
   const handleAddActive = (activeUniqueName: string) => {
-    dispatch(activeSelectThunk({ activeConfigItem: { activeUniqueName, count: tockenCount } }));
+    if (isTokenCountError) {
+      return;
+    }
+    const count = Number.parseInt(tokenCount);
+    dispatch(activeSelectThunk({ activeConfigItem: { activeUniqueName, count } }));
   };
 
   const count = activeListFiltered.length;
@@ -44,7 +45,7 @@ export function ActiveSelect() {
   });
   const items = virtualizer.getVirtualItems();
   return (
-    <div className={styles.ActiveSelect} onClick={(e) => e.stopPropagation()}>
+    <div className={styles.ActiveSelect}>
       <button className={styles.closeBtn} onClick={() => dispatch(setIsShowActiveSelect(false))}>
         X
       </button>
@@ -59,12 +60,12 @@ export function ActiveSelect() {
             onChange={(e) => setFilterValue(e.target.value)}
           />
           <input
-            className={styles.input}
+            className={classNames(styles.input, isTokenCountError && styles.inputError)}
             placeholder={'Единиц валюты...'}
-            value={tockenCount}
+            value={tokenCount}
             type={'number'}
             min={1}
-            onChange={(e) => handleSetCount(e.target.value)}
+            onChange={(e) => setTokenCount(e.target.value)}
           />
           <div className={styles.activeListWrapper} ref={parentRef}>
             <ul
